@@ -1,0 +1,23 @@
+[base]
+path = "/data/users/mhance/SUSY"
+output = "SUSY_SleptonWinoBino_isrslep_{{madgraph['masses']['MSLEP']}}_{{madgraph['masses']['MN2']}}_{{madgraph['masses']['MN1']}}"
+template = "{{PWD}}/templates/sleptons.toml"
+process_path = "{{PWD}}/cards/process/"
+param_path = "{{PWD}}/cards/param/"
+
+[madgraph]
+params="SleptonWinoBino"
+nevents=50000
+
+[madgraph.proc]
+name = "isrslep"
+
+[madgraph.masses]
+MSLEP = xxx
+MC1 = xxx
+MN2 = xxx
+MN1 = xxx
+MSNU = xxx
+
+[pythia]
+mpi = "on"

@@ -1,0 +1,22 @@
+[base]
+path = "/data/users/mhance/SUSY"
+output = "SUSY_1938"
+template = "{{PWD}}/templates/ewkinos.toml"
+process_path = "{{PWD}}/cards/process/"
+param_path = "{{PWD}}/cards/param/"
+
+[madgraph]
+params="1938"
+nevents=100000
+
+[madgraph.proc]
+name = "ewksusy"
+
+[madgraph.masses]
+
+[pythia]
+mpi = "off"
+
+[analysis]
+kfactor = 1.2
+branchingratio = 1.0

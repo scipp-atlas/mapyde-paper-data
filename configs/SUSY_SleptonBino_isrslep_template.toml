@@ -1,0 +1,8 @@
+[base]
+path = "/data/users/mhance/SUSY"
+output = "SUSY_SleptonBino_isrslep_xxx_xxx"
+template = "{{PWD}}/templates/sleptons.toml"
+
+[madgraph.masses]
+MSLEP = xxx
+MN1 = xxx
