@@ -75,6 +75,7 @@ lumi = 139000
 skip = false
 additional_opts = ""
 name = "EwkCompressed2018"
+outputtag = ""
 
 [sa2json]
 inputs = "{{simpleanalysis['name']}}.root"
