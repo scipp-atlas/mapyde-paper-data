@@ -74,6 +74,7 @@ lumi = 139000
 skip = false
 additional_opts = ""
 name = "EwkCompressed2018"
+input = ""
 outputtag = ""
 
 [sa2json]
@@ -87,3 +88,4 @@ skip = false
 likelihood = "Slepton_bkgonly.json"
 image = "pyplotting:latest"
 gpu-options = "-c -B jax"
+other-options = ""

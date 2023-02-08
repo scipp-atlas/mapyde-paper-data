@@ -27,6 +27,37 @@ run_point () {
     # ==============================================================================
 }
 
+run_point_acceptance () {
+    slep=$1
+    dM=$2
+    templatetag=${3:-"acceptance_"}
+    model=${5:-"SleptonBino"}
+    proc=${6:-"isrslep"}
+
+    N1=$(bc <<< "scale=2; (${slep}-${dM})")
+
+    mergetag="SUSY_${model}_${proc}_${slep}_${N1}"
+	
+    newconfig="configs/${resultsdir}/${mergetag}.toml"
+    echo $newconfig
+    
+    # ==============================================================================
+    # make a new config file from a template
+    sed s_"MSLEP = xxx"_"MSLEP = ${slep}"_ configs/SUSY_${model}_${proc}_${templatetag}template.toml |
+	sed s_"MN1 = xxx"_"MN1 = ${N1}"_ |
+	sed s="/data/users/mhance/SUSY"="$baseresultsdir/$resultsdir"= |
+	sed s/"xxx_xxx"/"${slep}_${N1}"/ > $newconfig
+    # ==============================================================================
+    
+    # ==============================================================================
+    # run the config file
+    mapyde run madgraph ${newconfig}
+    mapyde run simpleanalysis ${newconfig}
+    mapyde run sa2json ${newconfig}
+    mapyde run pyhf ${newconfig}
+    # ==============================================================================
+}
+
 run_3D_point () {
     slep=$1
     dM1=$2
@@ -142,3 +173,4 @@ rerun_from_sa2json () {
     done	
     # ==============================================================================
 }
+
