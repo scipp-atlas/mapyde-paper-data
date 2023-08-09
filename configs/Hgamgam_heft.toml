@@ -1,0 +1,22 @@
+[base]
+path = "{{PWD}}"
+output = "Hgamgam_heft_001"
+template = "{{PWD}}/templates/SM.toml"
+process_path = "{{PWD}}/cards/process/"
+param_path = "{{PWD}}/cards/param/"
+
+[madgraph]
+nevents=10000
+params="sm-heft"
+
+[madgraph.proc]
+name = "Hgamgam_heft"
+card = false
+contents = """
+import model heft
+generate p p > h, h > a a
+output -f
+"""
+
+[pythia]
+mpi = "off"
