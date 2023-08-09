@@ -1,0 +1,82 @@
+[base]
+path = "{{PWD}}"
+output = "output"
+logs = "logs"
+data_path = "{{MAPYDE_DATA}}"
+cards_path = "{{MAPYDE_CARDS}}"
+scripts_path = "/home/mhance/mapyde/scripts"
+process_path = "{{MAPYDE_CARDS}}/process/"
+param_path = "{{MAPYDE_CARDS}}/param/"
+run_path = "{{MAPYDE_CARDS}}/run/"
+pythia_path = "{{MAPYDE_CARDS}}/pythia/"
+delphes_path = "{{MAPYDE_CARDS}}/delphes/"
+madspin_path = "{{MAPYDE_CARDS}}/madspin/"
+likelihoods_path = "{{MAPYDE_LIKELIHOODS}}"
+template = false
+
+[madgraph]
+skip = false
+params = "sm-full"
+version = "madgraph:latest-2.9.10"
+batch = false
+paramcard = "{{madgraph['params']}}.slha"
+output = "run.mg5"
+cores = 1
+
+[madgraph.run]
+card = "default_LO.dat"
+ecms = 13000
+nevents = 50000
+seed = 0
+
+[madgraph.run.options]
+ptj = 20
+xqcut = -1
+pta = 15
+
+[madgraph.proc]
+name = "Hmumu"
+card = "{{madgraph['proc']['name']}}"
+
+[madspin]
+skip = true
+card = ''
+
+[pythia]
+skip = false
+card = "pythia8_card.dat"
+additional_opts = ""
+
+[delphes]
+skip = false
+additional_opts = ""
+card = "delphes_card_ATLAS.tcl"
+version = "delphes"
+output = "delphes/delphes.root"
+
+[analysis]
+script = "lowlevelAna.py"
+XSoverride = -1
+kfactor = 1
+output = "analysis/lowlevelAna.root"
+lumi = 139000
+
+[simpleanalysis]
+skip = true
+additional_opts = ""
+name = "EwkCompressed2018"
+input = ""
+outputtag = ""
+
+[sa2json]
+inputs = "{{simpleanalysis['name']}}{{simpleanalysis['outputtag']}}.root"
+image = "pyplotting:latest"
+output = "{{simpleanalysis['name']}}{{simpleanalysis['outputtag']}}_patch.json"
+options = "-c"
+
+[pyhf]
+skip = true
+likelihood = "Slepton_bkgonly.json"
+image = "pyplotting:latest"
+gpu-options = "-c -B jax"
+other-options = ""
